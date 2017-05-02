@@ -74,10 +74,12 @@ var MainScene = (function (_super) {
         this.squareMap = new SquareMap(this.rowNum, this.colNum);
         this.addRandomSquare();
         com.lion.managers.SecondManager.getInstance().addItem(this);
+        this.updateSecond(0);
+        this.addScore(0);
     };
     MainScene.prototype.updateSecond = function (seconds) {
         this.timeSpend++;
-        console.log(this.timeSpend);
+        //console.log(this.timeSpend);
         this.timeTxt.text = "Time: " + this.getTimeString(this.timeSpend);
     };
     MainScene.prototype.addScore = function (score) {
@@ -120,12 +122,10 @@ var MainScene = (function (_super) {
                 var square = arr[i];
                 var newPt = this.getPositionByIndexes(square.position.y, square.position.x);
                 square.alpha = 1;
-                if (i != arr.length - 1) {
+                if (i != arr.length - 1)
                     egret.Tween.get(square).to({ x: newPt.x, y: newPt.y }, this.aniTime);
-                }
-                else {
+                else
                     egret.Tween.get(square).to({ x: newPt.x, y: newPt.y }, this.aniTime).call(this.animateOver, this, [arr]);
-                }
             }
         }
         else {
@@ -154,7 +154,7 @@ var MainScene = (function (_super) {
         this.addRandomSquare();
         if (!this.squareMap.checkAlive()) {
             console.log("dead");
-            // SecondManager.getInstance().removeItem(this);
+            com.lion.managers.SecondManager.getInstance().removeItem(this);
             return;
         }
         this.initKey();

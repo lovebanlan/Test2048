@@ -91,10 +91,12 @@ class MainScene extends egret.Sprite implements com.lion.managers.interfaces.ISe
 		this.addRandomSquare();
 		
 		com.lion.managers.SecondManager.getInstance().addItem(this);
+		this.updateSecond(0);
+		this.addScore(0);
 	}
 	public updateSecond(seconds:number):void{
 		this.timeSpend ++;
-		console.log(this.timeSpend);
+		//console.log(this.timeSpend);
 		this.timeTxt.text = "Time: " + this.getTimeString(this.timeSpend);
 	}
 	private addScore(score:number):void{
